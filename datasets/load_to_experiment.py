@@ -3,10 +3,10 @@ from numpy import array, reshape
 from .load import load_msrcv1 as load_msrcv1_, load_multiple_features as load_multiple_features_
 
 
+# chargement de la dataset msrcv1 pour les expérimentations d'un modèle
+def load_msrcv1(to="mcles", path_dir_datasets=""):
 
-def load_msrcv1(to="mcles", path_dir_dataset=""):
-
-    dataset = load_msrcv1_(path_dir_dataset=path_dir_dataset)
+    dataset = load_msrcv1_(path_dir_datasets=path_dir_datasets)
     
     if to == "mcles":
         
@@ -30,9 +30,9 @@ def load_msrcv1(to="mcles", path_dir_dataset=""):
         
     return dataset
         
-
-def load_multiple_features(to="mcles", path_dir_dataset=""):
-    dataset = load_multiple_features_(path_dir_dataset=path_dir_dataset)
+# chargement de la dataset multiples futures pour les expérimentations d'un modèle
+def load_multiple_features(to="mcles", path_dir_datasets=""):
+    dataset = load_multiple_features_(path_dir_datasets=path_dir_datasets)
     
     if to == "mcles":
         
@@ -52,4 +52,11 @@ def load_multiple_features(to="mcles", path_dir_dataset=""):
         dataset["parameters"] = {
             "k": 10,
         }
+
+# chargement de toutes les datasets pour les expérimentations d'un modèle
+def load_multiple_features(to="mcles", path_dir_datasets=""):
+    datasets = []
+    datasets.append(load_msrcv1(to=to, path_dir_datasets=path_dir_datasets))
+    datasets.append(load_multiple_features(to=to, path_dir_datasets=path_dir_datasets))
     
+    return datasets

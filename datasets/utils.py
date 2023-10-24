@@ -20,5 +20,13 @@ def visualize(data2d, labels):
         plt.scatter(data2d[data[key], 0], data2d[data[key], 1])
         
     plt.show()
-    
-    
+
+# visualisation d'une dataset
+def visualise_dataset(dataset,withtitle=True):
+    it = 1
+    for x in dataset['X']:
+        p = project_data(x.T)
+        if withtitle:
+            plt.title(f"vue {it}")
+        visualize(p, dataset['Y'])
+        it += 1
